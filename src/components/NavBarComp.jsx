@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import { useKey } from "../useKey";
+
 export default function NavBarComp({ query, setQuery, movies }) {
   return (
     <NavBar>
@@ -26,6 +29,23 @@ function Logo() {
 }
 
 function Search({ query, setQuery }) {
+  //* Using Ref Hook
+  //* 1
+  const inputElement = useRef(null); // Usually null in case of DOM element
+
+  useKey("Enter", () => {
+    if (document.activeElement === inputElement.current) return;
+
+    inputElement.current.focus();
+    setQuery("");
+  });
+
+  //* 3
+  useEffect(function () {
+    //inputElement.current is the DOM element
+    inputElement.current.focus();
+  }, []);
+
   return (
     <input
       className="search"
@@ -33,6 +53,8 @@ function Search({ query, setQuery }) {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      //* 2
+      ref={inputElement}
     />
   );
 }
