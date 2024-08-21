@@ -12,7 +12,7 @@ import { WatchedSummary } from "./components/WatchedMoviesList";
 export const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-export const apiKey = "ed55aa58";
+export const apiKey = "";
 
 export default function App() {
   const [query, setQuery] = useState("");
